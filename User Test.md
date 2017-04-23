@@ -58,6 +58,7 @@ FONT:
 Title: font-family: 'Nova Mono', monospace;
 <link href="https://fonts.googleapis.com/css?family=Nova+Mono&amp;subset=greek" rel="stylesheet”>
 
-Subtitle: font-family: 'Montserrat Alternates', sans-serif;
+Subtitle & text: font-family: 'Montserrat Alternates', sans-serif;
 <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates|Nova+Mono&amp;subset=greek" rel="stylesheet">
+
 
