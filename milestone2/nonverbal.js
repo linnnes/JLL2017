@@ -16,7 +16,7 @@
 var canvas;
 var context;
 var images = {};
-var totalResources = 3;
+var totalResources = 5;
 var numResourcesLoaded = 0;
 var fps = 30;
 var breathInc = 0.1;
@@ -71,6 +71,8 @@ function prepareCanvas(canvasDiv, canvasWidth, canvasHeight) {
 	loadImage("pbody");
 	loadImage("parmleft");
 	loadImage("parmright");
+  loadImage("tie");
+  loadImage("eyeglasses");
 
 }
 
@@ -141,7 +143,18 @@ function redraw() {
 	context.drawImage(images["parmright"], x + 560, y + 130 - breathAmt);
   } 
 
-  
+  if (jumping) {
+  context.drawImage(images["tie"], x + 560, y + 90 - breathAmt);
+  } else {
+  context.drawImage(images["tie"], x + 560, y + 130 - breathAmt);
+  } 
+
+  if (jumping) {
+  context.drawImage(images["eyeglasses"], x + 560, y + 90 - breathAmt);
+  } else {
+  context.drawImage(images["eyeglasses"], x + 560, y + 130 - breathAmt);
+  } 
+
 
 
 

@@ -10,7 +10,33 @@ var questions = [
   "Give a time when you went above and beyond the requirements for a project.",
   "Tell me about a time when you disagreed with your boss.",
   "Are you a leader or a follower?",
-  "What are your hobbies?"
+  "What are your hobbies?",
+  "How would you rate yourself on producing appropriate work for a broad range of clients?",
+  "This is a fast-paced environment. How comfortable are you with short deadlines and new trends?",
+  "Describe your experience with presenting your work to clients.",
+  "Have you ever represented your agency at a client meeting? How did you handle it?",
+  "How has the brand you most recently worked with evolved over time? What part did you play in that?",
+  "How do you sustain long-term interest in designing for one brand?",
+  "How do you adapt a brand for different audiences?",
+  "How much experience do you have with presenting work to key stakeholders?",
+  "How would you learn about our brand during your first week at work?",
+  "What was your role on this project?",
+  "How much time did you have to create this piece?",
+  "How did you work with other members of your team?",
+  "Tell us about a favorite piece of work in your portfolio.",
+  "Where did you start on this project? What images, copy, or guidelines were you given to begin?",
+  "Talk about one of your more successful design projects. What kind of results did it achieve, and how do you define a success?",
+  "As a graphic designer, whose work do you admire? Who are your design heroes?",
+  "How do you stay updated on the latest tools and trends?",
+  "Who would be your ideal brand or client to work on, and why?",
+  "Describe the structure of your current/previous team. Who did you work with on a regular basis? What did they do?",
+  "How do you prepare to present your work to clients or stakeholders?",
+  "What do you do when clients or stakeholders give you negative feedback?",
+  "How do you start a project? How do you know when it is finished?",
+  "What do you do when you hit a creative block? Talk about a design challenge you encountered and how you overcame. it.",
+  "What type of design work do you enjoy the most; print or digital? How do you find transitioning between the two?",
+  "How do you prepare your work for production? (e.g. Prep work for print or for front end development)",
+  "What do you do when you are running out of time on a project?"
   ];
 
 var state = "initial"
@@ -55,7 +81,7 @@ function startDictation() {
     setEyeColor("gold");
     // speak("I am a demo text. Test my speed! Test my tune!")
 
-    recognition.continuous = false;
+    recognition.continuous = true;
     recognition.interimResults = false;
 
     recognition.lang = "en-US";
@@ -108,9 +134,9 @@ function decide_response(user_said) {
   console.log("# user_word_count: " + user_word_count);
 
   if (user_word_count > 10) {
-    word_count_evaluation = "the length of your answer is just right!"
+    word_count_evaluation = "the length of your answer is just right! Let's try the next one?"
   } else {
-    word_count_evaluation = "I am afraid your answer is a bit of short. You might want to speak more."
+    word_count_evaluation = "I am afraid your answer is a bit of short. Let's try it again?"
   }
 
   // sentiment analysis
@@ -135,7 +161,11 @@ function decide_response(user_said) {
 
 
 
-  if (user_said.toLowerCase().includes("last time"))  {
+  if (user_said.toLowerCase().includes("last"))  {
+    response = "You got it! Last time you practiced...... hmm....... " + practiced_q_array[practiced_q_array.length - 1]
+    state = "initial"
+
+  } else if (user_said.toLowerCase().includes("last time answer"))  {
     response = "You got it! Last time you practiced...... hmm....... " + practiced_q_array[practiced_q_array.length - 1]
     + "And...... this is your answer......" + user_answer_array[user_answer_array.length - 1]
     + "the total words are...." + user_word_count
@@ -147,9 +177,8 @@ function decide_response(user_said) {
     || user_said.toLowerCase().includes("practice") && state === "initial"
     || user_said.toLowerCase().includes("yes") && state === "waiting"
     || user_said.toLowerCase().includes("practice") && state === "waiting") {
-    response = "Sounds good! Let's do this." 
-    + "Let's see........"
-    + "Hmmm...."
+    response = "Sounds good! Let's do this." + "\n"
+    + "Let's see........" + "Hmmm...." + "\n"
     + ramdon_question
 
     practiced_q_array.push(ramdon_question);
@@ -176,12 +205,19 @@ function decide_response(user_said) {
     console.log("## user_answer_array: " + user_answer_array.join(", "))
 
     response = 
-    "Excellent! Your score is: " + user_score + user_score_evaluation
-    + "And...... your words are: " + user_word_count
+    "Excellent! Your score is: " + user_score + "\n" + user_score_evaluation + "\n"
+    + "And...... your words are: " + user_word_count + "\n"
     + word_count_evaluation
-    + "And...... this is your answer: " + user_answer_array[user_answer_array.length - 1]
-    + "And...... the question you just practiced is: " + practiced_q_array[practiced_q_array.length - 1]
-    state = "initial"
+    // + "And...... this is your answer: " + user_answer_array[user_answer_array.length - 1]
+    // + "And...... the question you just practiced is: " + practiced_q_array[practiced_q_array.length - 1]
+    state = "waiting"
+
+
+  // } 
+  // else if (state === "LastTime") {
+  //   response = practiced_q_array[practiced_q_array.length - 1]
+  //   console.log("## State: LastTime: " + response)
+  //   state = "listening"
 
   } else {
     response = "Ops, what did you say?";
