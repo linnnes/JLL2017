@@ -71,7 +71,11 @@ var ramdon_question = "placeholder"
 
 function startDictation() {
 
+
+
   if (window.hasOwnProperty('webkitSpeechRecognition')) {
+
+    start_img.src = 'mic-animate.gif';
 
     var recognition = new webkitSpeechRecognition();
 
@@ -108,6 +112,8 @@ function startDictation() {
       document.getElementById("txt").value = bot_response;
 
       //`document.getElementById('labnol').submit();
+
+      start_img.src = 'mic.gif';
     };
 
     recognition.onerror = function(e) {
@@ -175,6 +181,7 @@ function decide_response(user_said) {
 
   } else if (practice_parse_array && state === "initial"
     || user_said.toLowerCase().includes("practice") && state === "initial"
+    || user_said.toLowerCase().includes("another question") && state === "listening"
     || user_said.toLowerCase().includes("yes") && state === "waiting"
     || user_said.toLowerCase().includes("practice") && state === "waiting") {
     response = "Sounds good! Let's do this." + "\n"
@@ -205,7 +212,7 @@ function decide_response(user_said) {
     console.log("## user_answer_array: " + user_answer_array.join(", "))
 
     response = 
-    "Excellent! Your score is: " + user_score + "\n" + user_score_evaluation + "\n"
+    "Excellent! Your positive and negative words score is: " + user_score + "\n" + user_score_evaluation + "\n"
     + "And...... your words are: " + user_word_count + "\n"
     + word_count_evaluation
     // + "And...... this is your answer: " + user_answer_array[user_answer_array.length - 1]
@@ -264,6 +271,7 @@ function speak(text, callback) {
       
       /* Nonverbal actions at the end of robot's speaking */
       setBreathInc(slowBreathInc); 
+
 
       if (callback) {
           callback();

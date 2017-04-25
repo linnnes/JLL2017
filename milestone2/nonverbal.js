@@ -144,15 +144,15 @@ function redraw() {
   } 
 
   if (jumping) {
-  context.drawImage(images["tie"], x + 560, y + 90 - breathAmt);
+  context.drawImage(images["tie"], x + 500, y + 480 - breathAmt);
   } else {
-  context.drawImage(images["tie"], x + 560, y + 130 - breathAmt);
+  context.drawImage(images["tie"], x + 500, y + 420 - breathAmt);
   } 
 
   if (jumping) {
-  context.drawImage(images["eyeglasses"], x + 560, y + 90 - breathAmt);
+  context.drawImage(images["eyeglasses"], x + 476.5, y + 355 - breathAmt);
   } else {
-  context.drawImage(images["eyeglasses"], x + 560, y + 130 - breathAmt);
+  context.drawImage(images["eyeglasses"], x + 476.5, y + 355 - breathAmt);
   } 
 
 
